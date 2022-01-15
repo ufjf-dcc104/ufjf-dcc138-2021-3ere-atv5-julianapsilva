@@ -76,6 +76,7 @@ export default class Cena {
             if (idx >= 0)
                 this.sprites.splice(idx, 1)
         }
+        this.aRemover = []
 
     }
 
