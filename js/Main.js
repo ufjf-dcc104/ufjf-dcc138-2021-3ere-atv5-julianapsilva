@@ -11,6 +11,7 @@ assets.carregaImagem("garota", "assets/garota.png")
 assets.carregaImagem("esqueleto", "assets/skelly.png")
 assets.carregaImagem("orc", "assets/orc.png")
 assets.carregaAudio("moeda", "assets/sound.wav")
+assets.carregaAudio("boom", "assets/boom.wav")
 
 
 
@@ -44,6 +45,9 @@ document.addEventListener("keydown", (e) => {
             break;
         case "c":
             assets.audio("moeda").play()
+            break;
+        case "b":
+            assets.audio("boom").play()
             break;
     }
 })
