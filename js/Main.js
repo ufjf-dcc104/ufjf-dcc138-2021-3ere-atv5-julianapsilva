@@ -17,8 +17,8 @@ assets.carregaAudio("moeda", "assets/sound.wav")
 assets.carregaAudio("boom", "assets/boom.wav")
 
 const canvas = document.querySelector("canvas")
-canvas.width = 14 * 32
-canvas.height = 10 * 32
+canvas.width = 20 * 32
+canvas.height = 16 * 32
 
 input.configurarTeclado(
     {
@@ -31,7 +31,7 @@ input.configurarTeclado(
 
 const cena1 = new Cena(canvas, assets)
 
-const mapa1 = new Mapa(10, 14, 32)
+const mapa1 = new Mapa(16, 20, 32)
 mapa1.carregaMapa(modeloMapa1)
 cena1.configuraMapa(mapa1)
 
