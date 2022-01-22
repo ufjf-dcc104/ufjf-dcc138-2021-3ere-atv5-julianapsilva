@@ -28,10 +28,6 @@ export default class Mapa {
                         ctx.drawImage(assets.img('obstaculo'),
                             32 * c, 32 * l, 32, 32)
                         break;
-                    // case 2:
-                    //     ctx.fillStyle = 'red'
-                    //     ctx.strokeStyle = 'orange'
-                    //     break;
                     default:
                         ctx.drawImage(assets.img('floor7'),
                             32 * c, 32 * l, 32, 32)
@@ -53,5 +49,10 @@ export default class Mapa {
             }
         }
 
+    }
+    isValidPosition(x, y) {
+        if (this.tiles[x][y])
+            return false
+        return true
     }
 }

@@ -15,7 +15,6 @@ assets.carregaImagem("esqueleto", "assets/skelly.png")
 assets.carregaImagem("orc", "assets/orc.png")
 assets.carregaAudio("moeda", "assets/sound.wav")
 assets.carregaAudio("boom", "assets/boom.wav")
-assets.carregaImagem("floor", "assets/floor.png")
 assets.carregaImagem("floor7", "assets/floor7.png")
 assets.carregaImagem("obstaculo", "assets/obstaculo.png")
 
@@ -69,13 +68,32 @@ function perseguePC(dt) {
 
 const en1 = new Sprite({ x: 360, color: 'red', controlar: perseguePC })
 cena1.adicionar(en1)
-cena1.adicionar(new Sprite({ x: 115, y: 70, vy: 10, color: 'red', controlar: perseguePC }))
-cena1.adicionar(new Sprite({ x: 115, y: 160, vy: -10, color: 'red', controlar: perseguePC }))
+cena1.adicionar(new Sprite({ x: 115, y: 70, vy: 8, color: 'red', controlar: perseguePC }))
+cena1.adicionar(new Sprite({ x: 115, y: 160, vy: -8, color: 'red', controlar: perseguePC }))
 
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+}
 
-// (setInterval(() => {
-    
-// }, 10000))()
+(() => {
+    setInterval(() => {
+        let x = getRandomInt(1, 16)
+        let y = getRandomInt(1, 20)
+        if (mapa1.isValidPosition(x, y)) {
+            cena1.adicionar(new Sprite({ x: 32 * x, y: 32 * y, vy: 10, color: 'orange', controlar: perseguePC }))
+        }
+        else {
+            x = getRandomInt(1, 16)
+            y = getRandomInt(1, 20)
+            if (mapa1.isValidPosition(x, y)) {
+                cena1.adicionar(new Sprite({ x: 32 * x, y: 32 * y, vy: -10, color: 'orange', controlar: perseguePC }))
+            }
+
+        }
+    }, 10000)
+})()
 
 
 cena1.iniciar()
