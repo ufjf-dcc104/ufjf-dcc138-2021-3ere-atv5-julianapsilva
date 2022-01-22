@@ -14,26 +14,29 @@ export default class Mapa {
         this.cena = null
     }
 
-    desenhar(ctx) {
+    desenhar(ctx, assets) {
         for (let l = 0; l < this.LINHAS; l++) {
             for (let c = 0; c < this.COLUNAS; c++) {
                 switch (this.tiles[l][c]) {
+                    case 0:
+                        ctx.drawImage(assets.img('floor7'),
+                            32 * c, 32 * l, 32, 32)
+                        break;
                     case 1:
-                        ctx.fillStyle = 'grey'
-                        ctx.strokeStyle = 'black'
+                        ctx.drawImage(assets.img('floor7'),
+                            32 * c, 32 * l, 32, 32)
+                        ctx.drawImage(assets.img('obstaculo'),
+                            32 * c, 32 * l, 32, 32)
                         break;
-                    case 2:
-                        ctx.fillStyle = 'red'
-                        ctx.strokeStyle = 'orange'
-                        break;
+                    // case 2:
+                    //     ctx.fillStyle = 'red'
+                    //     ctx.strokeStyle = 'orange'
+                    //     break;
                     default:
-                        ctx.fillStyle = 'black'
-                        ctx.strokeStyle = 'gray'
+                        ctx.drawImage(assets.img('floor7'),
+                            32 * c, 32 * l, 32, 32)
                         break;
                 }
-                ctx.lineWidth = 1
-                ctx.fillRect(c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE)
-                ctx.strokeRect(c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE)
             }
         }
     }
