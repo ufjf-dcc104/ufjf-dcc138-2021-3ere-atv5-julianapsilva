@@ -70,8 +70,11 @@ export default class Cena {
             const spriteA = this.sprites[a]
             for (let b = a + 1; b < this.sprites.length; b++) {
                 const spriteB = this.sprites[b];
-                if (spriteA.colidiuCom(spriteB))
+                if (spriteA.colidiuCom(spriteB)) {
+                    this.assets.play("boom")
                     this.quandoColidir(spriteA, spriteB)
+                }
+
             }
         }
     }
