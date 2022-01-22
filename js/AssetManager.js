@@ -1,4 +1,4 @@
-export default class AssetManager{
+export default class AssetManager {
     constructor(mixer = null) {
         this.aCarregar = 0
         this.carregadas = 0
@@ -28,13 +28,13 @@ export default class AssetManager{
         this.audios.set(chave, audio)
         this.aCarregar++
     }
-    
-    img (chave) {
+
+    img(chave) {
         return this.images.get(chave)
     }
 
-    audio (chave) {
-    return this.audios.get(chave)
+    audio(chave) {
+        return this.audios.get(chave)
     }
 
     progresso() {
@@ -48,6 +48,7 @@ export default class AssetManager{
     }
 
     play(chave) {
+        this.audio(chave).muted = true;
         this.mixer?.play(this.audio(chave))
     }
 
