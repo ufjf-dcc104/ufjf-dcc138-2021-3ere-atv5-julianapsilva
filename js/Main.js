@@ -15,6 +15,13 @@ assets.carregaImagem("esqueleto", "assets/skelly.png")
 assets.carregaImagem("orc", "assets/orc.png")
 assets.carregaAudio("moeda", "assets/sound.wav")
 assets.carregaAudio("boom", "assets/boom.wav")
+assets.carregaImagem("floor", "assets/floor.png")
+assets.carregaImagem("floor7", "assets/floor7.png")
+assets.carregaImagem("obstaculo", "assets/obstaculo.png")
+
+
+
+
 
 const canvas = document.querySelector("canvas")
 canvas.width = 20 * 32
@@ -35,7 +42,7 @@ const mapa1 = new Mapa(16, 20, 32)
 mapa1.carregaMapa(modeloMapa1)
 cena1.configuraMapa(mapa1)
 
-const pc = new Sprite({ x: 50, y: 150 })
+const pc = new Sprite({ x: 48, y: 150 })
 pc.controlar = function (dt) {
     if (input.comandos.get("MOVE_ESQUERDA")) {
         this.vx = - 50
@@ -64,6 +71,11 @@ const en1 = new Sprite({ x: 360, color: 'red', controlar: perseguePC })
 cena1.adicionar(en1)
 cena1.adicionar(new Sprite({ x: 115, y: 70, vy: 10, color: 'red', controlar: perseguePC }))
 cena1.adicionar(new Sprite({ x: 115, y: 160, vy: -10, color: 'red', controlar: perseguePC }))
+
+
+// (setInterval(() => {
+    
+// }, 10000))()
 
 
 cena1.iniciar()

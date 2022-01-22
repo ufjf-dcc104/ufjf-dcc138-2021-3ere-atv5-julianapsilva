@@ -12,10 +12,10 @@ export default class Cena {
         this.mapa = null
     }
     desenhar() {
-        this.ctx.fillStyle = "lightblue"
+        this.ctx.fillStyle = "#2f8136"
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
-        this.mapa?.desenhar(this.ctx)
+        this.mapa?.desenhar(this.ctx, this.assets)
 
         if (this.assets.acabou()) {
             for (let s = 0; s < this.sprites.length; s++) {
