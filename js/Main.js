@@ -34,7 +34,8 @@ input.configurarTeclado(
         "ArrowLeft": "MOVE_ESQUERDA",
         "ArrowRight": "MOVE_DIREITA",
         "ArrowUp": "MOVE_CIMA",
-        "ArrowDown": "MOVE_BAIXO"
+        "ArrowDown": "MOVE_BAIXO",
+        ' ': 'PROXIMA_CENA'
     }
 )
 
