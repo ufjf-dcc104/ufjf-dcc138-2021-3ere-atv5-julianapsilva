@@ -1,8 +1,9 @@
 export default class Mapa {
-    constructor(linhas = 8, colunas = 12, tamanho = 32) {
+    constructor(linhas = 8, colunas = 12, height = 72, width = 36) {
         this.LINHAS = linhas
         this.COLUNAS = colunas
-        this.SIZE = tamanho
+        this.HEIGHT = height
+        this.WIDTH = width
         this.tiles = []
 
         for (let l = 0; l < this.LINHAS; l++) {
@@ -18,21 +19,22 @@ export default class Mapa {
         for (let l = 0; l < this.LINHAS; l++) {
             for (let c = 0; c < this.COLUNAS; c++) {
                 switch (this.tiles[l][c]) {
-                    case 0:
-                        ctx.drawImage(assets.img('floor7'),
-                            32 * c, 32 * l, 32, 32)
-                        break;
                     case 1:
-                        ctx.drawImage(assets.img('floor7'),
-                            32 * c, 32 * l, 32, 32)
-                        ctx.drawImage(assets.img('obstaculo'),
-                            32 * c, 32 * l, 32, 32)
+                        ctx.fillStyle = 'black'
+                        ctx.strokeStyle = 'red'
+                        break;
+                    case 0:
+                        ctx.fillStyle = 'red'
+                        ctx.strokeStyle = 'black'
                         break;
                     default:
-                        ctx.drawImage(assets.img('floor7'),
-                            32 * c, 32 * l, 32, 32)
+                        ctx.fillStyle = 'black'
+                        ctx.strokeStyle = 'red'
                         break;
                 }
+                ctx.lineWidth = 1
+                ctx.fillRect(c * this.WIDTH, l * this.HEIGHT, this.WIDTH, this.HEIGHT)
+                ctx.strokeRect(c * this.WIDTH, l * this.HEIGHT, this.WIDTH, this.HEIGHT)
             }
         }
     }
