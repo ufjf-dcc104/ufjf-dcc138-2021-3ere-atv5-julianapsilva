@@ -16,27 +16,7 @@ export default class Mapa {
     }
 
     desenhar(ctx, assets) {
-        for (let l = 0; l < this.LINHAS; l++) {
-            for (let c = 0; c < this.COLUNAS; c++) {
-                switch (this.tiles[l][c]) {
-                    case 1:
-                        ctx.fillStyle = 'black'
-                        ctx.strokeStyle = 'red'
-                        break;
-                    case 0:
-                        ctx.fillStyle = 'red'
-                        ctx.strokeStyle = 'black'
-                        break;
-                    default:
-                        ctx.fillStyle = 'black'
-                        ctx.strokeStyle = 'red'
-                        break;
-                }
-                ctx.lineWidth = 1
-                ctx.fillRect(c * this.WIDTH, l * this.HEIGHT, this.WIDTH, this.HEIGHT)
-                ctx.strokeRect(c * this.WIDTH, l * this.HEIGHT, this.WIDTH, this.HEIGHT)
-            }
-        }
+            ctx.drawImage(assets.img('background'),0,0)
     }
 
     carregaMapa(modelo) {
