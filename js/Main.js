@@ -13,22 +13,29 @@ const input = new InputManager()
 const mixer = new Mixer(10)
 const assets = new AssetManager(mixer)
 
-assets.carregaImagem("garota", "assets/garota.png")
-assets.carregaImagem("esqueleto", "assets/skelly.png")
+
 assets.carregaImagem("orc", "assets/orc.png")
 assets.carregaAudio("moeda", "assets/sound.wav")
 assets.carregaAudio("boom", "assets/boom.wav")
 assets.carregaImagem("floor7", "assets/floor7.png")
 assets.carregaImagem("obstaculo", "assets/obstaculo.png")
+assets.carregaImagem("carro1", "assets/car1.png")
+assets.carregaImagem("carro2", "assets/car2.png")
+assets.carregaImagem("carro3", "assets/car3.png")
+assets.carregaImagem("carro4", "assets/car4.png")
+assets.carregaImagem("background", "assets/bg-aumen.png")
+assets.carregaAudio("music", "assets/music.mp3")
+
+
+
 
 
 
 
 
 const canvas = document.querySelector("canvas")
-canvas.width = 20 * 32
-canvas.height = 16 * 32
-
+canvas.width = 638
+canvas.height = 800
 input.configurarTeclado(
     {
         "ArrowLeft": "MOVE_ESQUERDA",
@@ -50,6 +57,11 @@ game.adicionarCena('jogo', cena1)
 game.adicionarCena('fim', cena2)
 
 
+cena1.adicionaSprite(360, assets)
+cena1.adicionaSprite(115, assets)
+cena1.adicionaSprite(36 * 5, assets)
+cena1.adicionaSprite(36 * 15, assets)
+
 
 function getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -59,20 +71,10 @@ function getRandomInt(min, max) {
 
 (() => {
     setInterval(() => {
-        let x = getRandomInt(1, 16)
-        let y = getRandomInt(1, 20)
-        if (mapa1.isValidPosition(x, y)) {
-            cena1.adicionar(new Sprite({ x: 32 * x, y: 32 * y, vy: 10, color: 'orange', controlar: perseguePC }))
-        }
-        else {
-            x = getRandomInt(1, 16)
-            y = getRandomInt(1, 20)
-            if (mapa1.isValidPosition(x, y)) {
-                cena1.adicionar(new Sprite({ x: 32 * x, y: 32 * y, vy: -10, color: 'orange', controlar: perseguePC }))
-            }
-
-        }
-    }, 10000)
+        const modelo = getRandomInt(0, 3)
+        let x = getRandomInt(2, 16)
+        cena1.adicionaSprite(x, assets, modelo)
+    }, 1000)
 })()
 
 
