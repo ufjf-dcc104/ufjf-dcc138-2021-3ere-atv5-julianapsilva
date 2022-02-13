@@ -26,5 +26,10 @@ export default class Mixer {
             }
         }
     }
+    para() {
+        const canal = this.canais[0]
+        canal.audio.pause()
+        canal.audio.currentTime = 0;
+    }
 
 }
