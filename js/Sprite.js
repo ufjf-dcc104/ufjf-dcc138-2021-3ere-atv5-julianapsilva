@@ -1,8 +1,8 @@
 export default class Sprite {
     // responsavel por modelar algo que se move na tela
-    constructor({ x = 100, y = 100, w = 20, h = 20,
+    constructor({ x = 100, y = 100, w = 36, h = 72,
         color = "white", vx = 0, vy = 0,
-        controlar = () => { }, tags = [] } = {}) {
+        controlar = () => { }, tags = [], assets, modelo = 'carro1' } = {},) {
         this.x = x
         this.y = y
         this.vx = vx
@@ -14,28 +14,23 @@ export default class Sprite {
         this.mx = 0
         this.my = 0
         this.controlar = controlar
-        this.tags = new Set()
+        this.assets = assets,
+            this.modelo = modelo,
+            this.tags = new Set()
         tags.forEach(tag => this.tags.add(tag))
     }
-    desenhar(ctx) {
-        ctx.fillStyle = this.color
-        ctx.fillRect(this.x - this.w / 2, this.y - this.h / 2, this.w, this.h)
-        ctx.strokeStyle = 'blue'
-        ctx.strokeRect(this.mx * this.cena.mapa.SIZE,
-            this.my * this.cena.mapa.SIZE,
-            this.cena.mapa.SIZE,
-            this.cena.mapa.SIZE
-        )
+    desenhar(ctx, modelo) {
+        if (this.assets) {
+            ctx.drawImage(this.assets.img(this.modelo),
+                this.x - this.w / 2, this.y - this.h / 2, this.w, this.h)
+        }
     }
-    controlar(dt) {
-
-
-    }
+    controlar(dt) { }
     mover(dt) {
         this.x = this.x + this.vx * dt
         this.y = this.y + this.vy * dt
-        this.mx = Math.floor(this.x / this.cena.mapa.SIZE)
-        this.my = Math.floor(this.y / this.cena.mapa.SIZE)
+        this.mx = Math.floor(this.x / this.cena.mapa.WIDTH)
+        this.my = Math.floor(this.y / this.cena.mapa.HEIGHT)
     }
     passo(dt) {
         this.controlar(dt)
@@ -59,86 +54,11 @@ export default class Sprite {
         this.aplicaRestricoesBaixo(this.mx - 1, this.my + 1)
         this.aplicaRestricoesBaixo(this.mx, this.my + 1)
         this.aplicaRestricoesBaixo(this.mx + 1, this.my + 1)
-        this.aplicaRestricoesCima(this.mx - 1, this.my - 1)
-        this.aplicaRestricoesCima(this.mx, this.my - 1)
-        this.aplicaRestricoesCima(this.mx + 1, this.my - 1)
     }
 
-    aplicaRestricoesDireita(pmx, pmy) {
-        const SIZE = this.cena.mapa.SIZE
-        if (this.vx > 0) {
-            if (this.cena.mapa.tiles[pmy][pmx] != 0) {
-                const tile = {
-                    x: pmx * SIZE + SIZE / 2,
-                    y: pmy * SIZE + SIZE / 2,
-                    w: SIZE,
-                    h: SIZE
-                }
-                this.cena.ctx.strokeStyle = 'white'
-                this.cena.ctx.strokeRect(tile.x - SIZE / 2, tile.y - SIZE / 2, SIZE, SIZE)
-                if (this.colidiuCom(tile)) {
-                    this.vx = 0
-                    this.x = tile.x - tile.w / 2 - this.w / 2 - 1
-                }
-            }
-        }
-    }
-    aplicaRestricoesEsquerda(pmx, pmy) {
-        const SIZE = this.cena.mapa.SIZE
-        if (this.vx < 0) {
-            if (this.cena.mapa.tiles[pmy][pmx] != 0) {
-                const tile = {
-                    x: pmx * SIZE + SIZE / 2,
-                    y: pmy * SIZE + SIZE / 2,
-                    w: SIZE,
-                    h: SIZE
-                }
-                this.cena.ctx.strokeStyle = 'white'
-                this.cena.ctx.strokeRect(tile.x - SIZE / 2, tile.y - SIZE / 2, SIZE, SIZE)
-                if (this.colidiuCom(tile)) {
-                    this.vx = 0
-                    this.x = tile.x + tile.w / 2 + this.w / 2 + 1
-                }
-            }
-        }
-    }
-    aplicaRestricoesBaixo(pmx, pmy) {
-        const SIZE = this.cena.mapa.SIZE
-        if (this.vy > 0) {
-            if (this.cena.mapa.tiles[pmy][pmx] != 0) {
-                const tile = {
-                    x: pmx * SIZE + SIZE / 2,
-                    y: pmy * SIZE + SIZE / 2,
-                    w: SIZE,
-                    h: SIZE
-                }
-                this.cena.ctx.strokeStyle = 'white'
-                this.cena.ctx.strokeRect(tile.x - SIZE / 2, tile.y - SIZE / 2, SIZE, SIZE)
-                if (this.colidiuCom(tile)) {
-                    this.vy = 0
-                    this.y = tile.y - tile.h / 2 - this.h / 2 - 1
-                }
-            }
-        }
-    }
-    aplicaRestricoesCima(pmx, pmy) {
-        const SIZE = this.cena.mapa.SIZE
-        if (this.vy < 0) {
-            if (this.cena.mapa.tiles[pmy][pmx] != 0) {
-                const tile = {
-                    x: pmx * SIZE + SIZE / 2,
-                    y: pmy * SIZE + SIZE / 2,
-                    w: SIZE,
-                    h: SIZE
-                }
-                this.cena.ctx.strokeStyle = 'white'
-                this.cena.ctx.strokeRect(tile.x - SIZE / 2, tile.y - SIZE / 2, SIZE, SIZE)
-                if (this.colidiuCom(tile)) {
-                    this.vy = 0
-                    this.y = tile.y + tile.h / 2 + this.h / 2 + 1
-                }
-            }
-        }
-    }
+    aplicaRestricoesDireita(pmx, pmy) { }
+    aplicaRestricoesEsquerda(pmx, pmy) { }
+    aplicaRestricoesBaixo(pmx, pmy) { }
+    aplicaRestricoesCima(pmx, pmy) { }
 
 }
