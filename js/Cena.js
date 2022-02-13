@@ -44,6 +44,7 @@ export default class Cena {
         this.passo(this.dt)
         this.desenhar()
         this.checaColisao()
+        this.verificaFim()
         this.removerSprites()
 
         if (this.rodando) this.iniciar()
@@ -82,7 +83,19 @@ export default class Cena {
 
         if (!this.aRemover.includes(b))
             this.aRemover.push(b)
-
+    }
+    verificaFim() {
+        for (let i = 0; i < this.sprites.length; i++) {
+            const sprite = this.sprites[i]
+            if (sprite.y < 10) {
+                if (sprite.tags.has('pc')) {
+                    this.assets.paraAudio('music')
+                    this.assets.play("sucess")
+                    this.game.selecionaCena('vitoria')
+                }
+                this.aRemover.push(sprite)
+            }
+        }
     }
     removerSprites() {
         for (const alvo of this.aRemover) {
