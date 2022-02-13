@@ -28,7 +28,7 @@ assets.carregaImagem("carro4", "assets/car4.png")
 assets.carregaImagem("background", "assets/bg-aumen.png")
 assets.carregaAudio("music", "assets/music.mp3")
 assets.carregaAudio("sucess", "assets/sucess.mp3")
-
+assets.carregaAudio("game-over", "assets/game-over.mp3")
 
 
 

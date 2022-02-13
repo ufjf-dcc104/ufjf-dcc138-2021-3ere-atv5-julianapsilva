@@ -6,7 +6,8 @@ export default class Cena {
         this.assets = assets
         this.game = null
         this.preparar()
-        this.rodada = 1
+        this.rodada = 1,
+        this.idInterval = null
     }
     desenhar() {
         this.ctx.fillStyle = "#2f8136"
@@ -96,10 +97,11 @@ export default class Cena {
                     this.game.selecionaCena('vitoria', time)
                     this.rodada++
                 }
-                else if (sprite.tags.has('pc')) {
+                else if (sprite.tags.has('pc') && this.rodada == 3) {
                     this.assets.paraAudio('music')
                     this.assets.play("sucess")
                     this.game.selecionaCena('vitoriaFim', 2500)
+                    this.rodada = 1
                 }
 
                 this.aRemover.push(sprite)

@@ -24,8 +24,10 @@ export default class CenaVitoria extends Cena {
         this.dt = (t - this.t0) / 1000
 
         if (this.assets.acabou()) {
+            this.assets.paraAudio('music')
             if (this.input.comandos.get('PROXIMA_CENA')) {
-                this.game.selecionaCena('jogo', 1500)
+                this.assets.play('music')
+                this.game.selecionaCena('jogo', 1300)
                 return
             }
         }
