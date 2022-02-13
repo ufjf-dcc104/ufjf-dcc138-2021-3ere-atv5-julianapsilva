@@ -7,8 +7,9 @@ import InputManager from "./InputManager.js"
 import Game from "./Game.js"
 import CenaJogo from "./CenaJogo.js"
 import CenaCarregando from "./CenaCarregando.js"
-import CenaFim from "./CenaFim.js"
+import CenaGameOver from "./CenaGameOver.js"
 import CenaVitoria from "./CenaVitoria.js"
+import CenaFimJogo from "./CenaFimJogo.js"
 
 const input = new InputManager()
 const mixer = new Mixer(10)
@@ -51,14 +52,15 @@ const game = new Game(canvas, assets, input)
 
 const cena0 = new CenaCarregando()
 const cena1 = new CenaJogo()
-const cena2 = new CenaFim()
+const cena2 = new CenaGameOver()
 const cena3 = new CenaVitoria()
+const cena4 = new CenaFimJogo()
 
 game.adicionarCena('carregando', cena0)
 game.adicionarCena('jogo', cena1)
 game.adicionarCena('fim', cena2)
 game.adicionarCena('vitoria', cena3)
-
+game.adicionarCena('vitoriaFim', cena4)
 
 cena1.adicionaSprite(36 * 5, assets, 2000, 150)
 cena1.adicionaSprite(36 * 15, assets, 2000, 150)
