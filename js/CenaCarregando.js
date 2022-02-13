@@ -24,7 +24,8 @@ export default class CenaCarregando extends Cena {
 
         if (this.assets.acabou()) {
             if (this.input.comandos.get('PROXIMA_CENA')) {
-                this.game.selecionaCena('jogo')
+                this.game.selecionaCena('jogo', 2500)
+                this.assets.play('music')
                 return
             }
         }
