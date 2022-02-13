@@ -8,6 +8,7 @@ import Game from "./Game.js"
 import CenaJogo from "./CenaJogo.js"
 import CenaCarregando from "./CenaCarregando.js"
 import CenaFim from "./CenaFim.js"
+import CenaVitoria from "./CenaVitoria.js"
 
 const input = new InputManager()
 const mixer = new Mixer(10)
@@ -25,7 +26,7 @@ assets.carregaImagem("carro3", "assets/car3.png")
 assets.carregaImagem("carro4", "assets/car4.png")
 assets.carregaImagem("background", "assets/bg-aumen.png")
 assets.carregaAudio("music", "assets/music.mp3")
-
+assets.carregaAudio("sucess", "assets/sucess.mp3")
 
 
 
@@ -51,31 +52,16 @@ const game = new Game(canvas, assets, input)
 const cena0 = new CenaCarregando()
 const cena1 = new CenaJogo()
 const cena2 = new CenaFim()
+const cena3 = new CenaVitoria()
 
 game.adicionarCena('carregando', cena0)
 game.adicionarCena('jogo', cena1)
 game.adicionarCena('fim', cena2)
+game.adicionarCena('vitoria', cena3)
 
 
-cena1.adicionaSprite(360, assets)
-cena1.adicionaSprite(115, assets)
-cena1.adicionaSprite(36 * 5, assets)
-cena1.adicionaSprite(36 * 15, assets)
-
-
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-}
-
-(() => {
-    setInterval(() => {
-        const modelo = getRandomInt(0, 3)
-        let x = getRandomInt(2, 16)
-        cena1.adicionaSprite(x, assets, modelo)
-    }, 1000)
-})()
+cena1.adicionaSprite(36 * 5, assets, 2000, 150)
+cena1.adicionaSprite(36 * 15, assets, 2000, 150)
 
 
 game.iniciar()
