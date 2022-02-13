@@ -6,6 +6,7 @@ export default class Cena {
         this.assets = assets
         this.game = null
         this.preparar()
+        this.rodada = 1
     }
     desenhar() {
         this.ctx.fillStyle = "#2f8136"
@@ -88,11 +89,19 @@ export default class Cena {
         for (let i = 0; i < this.sprites.length; i++) {
             const sprite = this.sprites[i]
             if (sprite.y < 10) {
-                if (sprite.tags.has('pc')) {
+                if (sprite.tags.has('pc') && this.rodada < 3) {
+                    const time = this.rodada == 1 ? 1350 : 1200
                     this.assets.paraAudio('music')
                     this.assets.play("sucess")
-                    this.game.selecionaCena('vitoria')
+                    this.game.selecionaCena('vitoria', time)
+                    this.rodada++
                 }
+                else if (sprite.tags.has('pc')) {
+                    this.assets.paraAudio('music')
+                    this.assets.play("sucess")
+                    this.game.selecionaCena('vitoriaFim', 2500)
+                }
+
                 this.aRemover.push(sprite)
             }
         }

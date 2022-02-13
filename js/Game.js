@@ -18,11 +18,15 @@ export default class Game {
             this.cena = cena
         }
     }
-    selecionaCena(chave) {
+    selecionaCena(chave, time) {
         if (this.cenas.has(chave)) {
             this.parar()
             this.cena = this.cenas.get(chave)
-            this.cena.preparar()
+            if (time) {
+                this.cena.preparar(time)
+            }
+            else
+                this.cena.preparar()
             this.iniciar()
         }
     }
