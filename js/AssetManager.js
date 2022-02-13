@@ -48,11 +48,11 @@ export default class AssetManager {
     }
 
     play(chave) {
-        this.audio(chave).muted = true;
-        this.mixer?.play(this.audio(chave))
+        this.audio(chave).play()
     }
     paraAudio(chave) {
-        this.mixer.para(this.audio(chave))
+        this.audio(chave).pause()
+        this.audio(chave).currentTime = 0;
     }
 
 }
