@@ -91,7 +91,7 @@ export default class Cena {
             const sprite = this.sprites[i]
             if (sprite.y < 10) {
                 if (sprite.tags.has('pc') && this.rodada < 3) {
-                    const time = this.rodada == 1 ? 1350 : 1200
+                    const time = this.rodada == 1 ? 1350 : 1100
                     this.assets.paraAudio('music')
                     this.assets.play("sucess")
                     this.game.selecionaCena('vitoria', time)
@@ -100,7 +100,7 @@ export default class Cena {
                 else if (sprite.tags.has('pc') && this.rodada == 3) {
                     this.assets.paraAudio('music')
                     this.assets.play("sucess")
-                    this.game.selecionaCena('vitoriaFim', 2500)
+                    this.game.selecionaCena('vitoriaFim', 2000)
                     this.rodada = 1
                 }
 

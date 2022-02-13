@@ -31,7 +31,7 @@ export default class CenaGameOver extends Cena {
             }, 1000)
             if (this.input.comandos.get('PROXIMA_CENA')) {
                 this.assets.play('music')
-                this.game.selecionaCena('jogo', 2500)
+                this.game.selecionaCena('jogo', 2000)
                 return
             }
         }
