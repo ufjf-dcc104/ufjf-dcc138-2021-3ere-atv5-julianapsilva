@@ -51,5 +51,8 @@ export default class AssetManager {
         this.audio(chave).muted = true;
         this.mixer?.play(this.audio(chave))
     }
+    paraAudio(chave) {
+        this.mixer.para(this.audio(chave))
+    }
 
 }
