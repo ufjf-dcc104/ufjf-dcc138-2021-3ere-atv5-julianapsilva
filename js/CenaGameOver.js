@@ -24,7 +24,13 @@ export default class CenaGameOver extends Cena {
         this.dt = (t - this.t0) / 1000
 
         if (this.assets.acabou()) {
+            this.assets.paraAudio('music')
+            this.assets.play('game-over')
+            setTimeout(() => {
+                this.assets.paraAudio('game-over')
+            }, 1000)
             if (this.input.comandos.get('PROXIMA_CENA')) {
+                this.assets.play('music')
                 this.game.selecionaCena('jogo', 2500)
                 return
             }
