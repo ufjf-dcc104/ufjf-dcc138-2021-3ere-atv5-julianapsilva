@@ -1,7 +1,7 @@
 import Cena from './Cena.js'
 import Mapa from "./Mapa.js"
 import Sprite from './Sprite.js'
-import modeloMapa1 from './maps/mapa1.js'
+import modeloMapa2 from './maps/mapa2.js'
 
 export default class CenaJogo extends Cena {
     quandoColidir(a, b) {
@@ -15,43 +15,63 @@ export default class CenaJogo extends Cena {
             this.game.selecionaCena('fim')
         }
     }
-    preparar() {
+    preparar(time) {
         super.preparar()
-        const mapa1 = new Mapa(16, 20, 32)
-        mapa1.carregaMapa(modeloMapa1)
-        this.configuraMapa(mapa1)
+        const mapa2 = new Mapa(11, 17, 72, 36)
+        mapa2.carregaMapa(modeloMapa2)
+        this.configuraMapa(mapa2)
 
-        const pc = new Sprite({ x: 48, y: 150 })
+        const pc = new Sprite({ x: 8 * 36, y: 10 * 72, assets: this.assets })
         pc.tags.add('pc')
         const cena = this
         pc.controlar = function (dt) {
             if (cena.input.comandos.get("MOVE_ESQUERDA")) {
-                this.vx = - 50
+                this.vx = - 45
             } else if (cena.input.comandos.get("MOVE_DIREITA")) {
-                this.vx = +50
+                this.vx = +45
+
             } else {
                 this.vx = 0
             }
             if (cena.input.comandos.get("MOVE_CIMA")) {
-                this.vy = - 50
+                this.vy = - 45
             } else if (cena.input.comandos.get("MOVE_BAIXO")) {
-                this.vy = +50
-            } else {
+                this.vy = +45
+            }
+            else {
                 this.vy = 0
             }
         }
 
         this.adicionar(pc)
-        function perseguePC(dt) {
-            this.vx = 25 * Math.sign(pc.x - this.x)
-            this.vy = 25 * Math.sign(pc.y - this.y)
-        }
-
-
-        const en1 = new Sprite({ x: 360, color: 'red', controlar: perseguePC, tags: ['enemy'] })
-        this.adicionar(en1)
-        this.adicionar(new Sprite({ x: 115, y: 70, vy: 8, color: 'red', controlar: perseguePC, tags: ['enemy'] }))
-        this.adicionar(new Sprite({ x: 115, y: 160, vy: -8, color: 'red', controlar: perseguePC, tags: ['enemy'] }))
+        clearInterval(this.idInterval)
+        this.adicionaEnemy(time)
     }
+    adicionaSprite(x, random) {
+        const modelos = ['carro2', 'carro3', 'carro4']
+        this.adicionar(new Sprite({
+            x: 36 * x, y: 11 * 72, color: 'orange', assets: this.assets,
+            controlar: this.perseguePC, tags: ['enemy'], modelo: modelos[random]
+        }))
+    }
+    perseguePC() {
+        this.vy = 150 * Math.sign(- this.y)
+    }
+
+    getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    adicionaEnemy(time = 2100) {
+        console.log('time', time);
+       this.idInterval = setInterval(() => {
+            const modelo = this.getRandomInt(0, 3)
+            let x = this.getRandomInt(2, 16)
+            this.adicionaSprite(x, modelo)
+        }, time)
+    }
+
 
 }
